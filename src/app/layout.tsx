@@ -14,6 +14,7 @@ const headingFont = Poppins({
 const defaultFont = Quicksand({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["600"],
 });
 
 export const metadata = {
