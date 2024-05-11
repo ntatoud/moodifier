@@ -1,5 +1,5 @@
 export type Mood = "happy" | "sad" | "angry" | "tired";
-type MonthlyData = Record<
+export type MonthlyData = Record<
   string,
   {
     mood: Mood;
@@ -170,81 +170,5 @@ export const monthlyData: MonthlyData = {
   "2024-05-12": {
     mood: "sad",
     note: "I'm sad today",
-  },
-  "2024-05-13": {
-    mood: "angry",
-    note: "I'm angry today",
-  },
-  "2024-05-14": {
-    mood: "tired",
-    note: "I'm tired today",
-  },
-  "2024-05-15": {
-    mood: "happy",
-    note: "I'm happy today",
-  },
-  "2024-05-16": {
-    mood: "sad",
-    note: "I'm sad today",
-  },
-  "2024-05-17": {
-    mood: "angry",
-    note: "I'm angry today",
-  },
-  "2024-05-18": {
-    mood: "tired",
-    note: "I'm tired today",
-  },
-  "2024-05-19": {
-    mood: "happy",
-    note: "I'm happy today",
-  },
-  "2024-05-20": {
-    mood: "sad",
-    note: "I'm sad today",
-  },
-  "2024-05-21": {
-    mood: "angry",
-    note: "I'm angry today",
-  },
-  "2024-05-22": {
-    mood: "tired",
-    note: "I'm tired today",
-  },
-  "2024-05-23": {
-    mood: "happy",
-    note: "I'm happy today",
-  },
-  "2024-05-24": {
-    mood: "sad",
-    note: "I'm sad today",
-  },
-  "2024-05-25": {
-    mood: "angry",
-    note: "I'm angry today",
-  },
-  "2024-05-26": {
-    mood: "tired",
-    note: "I'm tired today",
-  },
-  "2024-05-27": {
-    mood: "happy",
-    note: "I'm happy today",
-  },
-  "2024-05-28": {
-    mood: "sad",
-    note: "I'm sad today",
-  },
-  "2024-05-29": {
-    mood: "angry",
-    note: "I'm angry today",
-  },
-  "2024-05-30": {
-    mood: "tired",
-    note: "I'm tired today",
-  },
-  "2024-05-31": {
-    mood: "happy",
-    note: "I'm happy today",
   },
 };

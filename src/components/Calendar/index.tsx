@@ -1,14 +1,14 @@
 "use client";
 
-import type { TODO } from "@/types/utils";
 import { CalendarStoreProvider } from "./store";
 import { CalendarHeader } from "./CalendarHeader";
 import { CalendarContent } from "./CalendarContent";
+import type { MonthlyData } from "@/server/mocks/monthlyData";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export type CalendarProps = {
-  monthlyData: Record<string, TODO>;
+  monthlyData: MonthlyData;
 };
 export default function Calendar({ monthlyData }: CalendarProps) {
   const currentDate = new Date();
@@ -20,9 +20,9 @@ export default function Calendar({ monthlyData }: CalendarProps) {
         monthlyData,
       }}
     >
-      <div className="rounded-lg border border-input p-8">
+      <div className="rounded-lg border border-input p-6">
         <CalendarHeader />
-        <div className="grid grid-cols-7 place-content-center place-items-center gap-1 md:gap-2">
+        <div className="grid grid-cols-7 place-content-center place-items-center gap-1 lg:gap-2">
           {daysOfWeek.map((day) => (
             <span key={day}>{day}</span>
           ))}

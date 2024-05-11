@@ -2,35 +2,31 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { format, isAfter, isToday } from "date-fns";
 import { Tooltip } from "@/components/Tooltip";
+import { type UserTheme, userTheme } from "@/server/mocks/user";
+import Link from "next/link";
 
-const calendarDayVariants = cva(
-  "min-w-8 min-h-8 size-[10vw] md:size-20 border border-input p-2 text-center rounded-lg ",
-  {
-    variants: {
-      variant: {
-        outside: "cursor- opacity-20",
-        empty: "cursor-not-allowed ",
-        happy: "bg-green-600",
-        tired: "bg-gray-600",
-        sad: "bg-violet-600",
-        angry: "bg-red-600",
+const getCalendarDayVariant = ({ colors }: UserTheme) => {
+  return cva(
+    "min-w-8 min-h-8 place-content-center md:place-content-start aspect-square max-w-20 max-h-20 size-[10vw] md:size-[8vw] lg:size-20 border border-input p-2 text-center rounded-lg ",
+    {
+      variants: {
+        variant: {
+          outside: "cursor-not-allowed opacity-20",
+          empty: "bg-muted-foreground opacity-50",
+          ...colors.mood,
+        },
       },
     },
-  },
-);
+  );
+};
+
 type CalendarDayProps = {
   date: Date;
-} & VariantProps<typeof calendarDayVariants>;
+} & VariantProps<ReturnType<typeof getCalendarDayVariant>>;
 export const CalendarDay = ({ date, variant }: CalendarDayProps) => {
-  if (variant === "outside") {
-    return (
-      <div className={cn(calendarDayVariants({ variant }))}>
-        {format(date, "d")}
-      </div>
-    );
-  }
+  const calendarDayVariants = getCalendarDayVariant(userTheme);
 
-  if (isToday(date)) {
+  if (variant === "outside") {
     return (
       <div className={cn(calendarDayVariants({ variant }))}>
         {format(date, "d")}
@@ -41,12 +37,7 @@ export const CalendarDay = ({ date, variant }: CalendarDayProps) => {
   if (isAfter(date, new Date())) {
     return (
       <Tooltip title="This is in the future !" delay={0.2}>
-        <div
-          className={cn(
-            calendarDayVariants({ variant }),
-            "bg-muted-foreground opacity-50 ",
-          )}
-        >
+        <div className={cn(calendarDayVariants({ variant }))}>
           {format(date, "d")}
         </div>
       </Tooltip>
@@ -54,8 +45,13 @@ export const CalendarDay = ({ date, variant }: CalendarDayProps) => {
   }
 
   return (
-    <div className={cn(calendarDayVariants({ variant }))}>
+    <Link
+      href={`/notes/${format(date, "yyyy-MM-dd")}`}
+      className={cn(calendarDayVariants({ variant }), {
+        "border-2 border-foreground": isToday(date),
+      })}
+    >
       {format(date, "d")}
-    </div>
+    </Link>
   );
 };
