@@ -22,8 +22,6 @@ type CalendarDayProps = {
   date: Date;
 } & VariantProps<typeof calendarDayVariants>;
 export const CalendarDay = ({ date, variant }: CalendarDayProps) => {
-  console.log(variant);
-
   if (variant === "outside") {
     return (
       <div className={cn(calendarDayVariants({ variant }))}>

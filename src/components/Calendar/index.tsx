@@ -22,7 +22,7 @@ export default function Calendar({ monthlyData }: CalendarProps) {
     >
       <div className="rounded-lg border border-input p-8">
         <CalendarHeader />
-        <div className="grid grid-cols-7 place-content-center place-items-center gap-2">
+        <div className="grid grid-cols-7 place-content-center place-items-center gap-1 md:gap-2">
           {daysOfWeek.map((day) => (
             <span key={day}>{day}</span>
           ))}

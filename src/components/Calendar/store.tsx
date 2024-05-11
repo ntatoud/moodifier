@@ -2,7 +2,6 @@ import { createStore, type StoreApi, useStore } from "zustand";
 
 import { createContext, type ReactNode, useContext, useState } from "react";
 import { addMonths, subMonths } from "date-fns";
-import type { TODO } from "@/types/utils";
 import type { Mood } from "@/server/mocks/monthlyData";
 
 const CalendarStoreContext = createContext<StoreApi<CalendarStore> | null>(
@@ -41,7 +40,6 @@ export const CalendarStoreProvider = ({
     >;
   };
 }) => {
-  console.log("creating store");
   const [store] = useState(() =>
     createStore<CalendarStore>((set) => ({
       currentDate: initialValues.currentDate,

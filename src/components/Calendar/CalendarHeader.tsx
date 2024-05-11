@@ -9,13 +9,13 @@ export const CalendarHeader = () => {
   const headerDate = format(currentDate, "MMMM yyyy");
   return (
     <div className="grid grid-cols-3 items-center pb-4">
-      <Button className="place-self-start" onClick={prevMonth}>
+      <Button className="place-self-start self-center" onClick={prevMonth}>
         Prev
       </Button>
       <h3 className="text-center font-heading text-xl font-bold">
         {headerDate}
       </h3>
-      <Button className="place-self-end" onClick={nextMonth}>
+      <Button className="place-self-end self-center" onClick={nextMonth}>
         Next
       </Button>
     </div>
