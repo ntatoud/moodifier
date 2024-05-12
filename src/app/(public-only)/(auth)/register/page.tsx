@@ -7,26 +7,29 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/Form";
-import { register } from "@/features/auth/register/actions";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { api } from "@/trpc/react";
 
 export default function PageRegister() {
+  const router = useRouter();
+  const register = api.auth.register.useMutation({
+    onSuccess: () => {
+      router.refresh();
+      toast.success("Account created successfully");
+    },
+    onError: () => {
+      toast.error("Failed to create account");
+    },
+  });
+
   const form = useForm<RegisterFormFields>({
     values: { username: "", password: "", passwordConfirm: "" },
     resolver: zodResolver(zRegisterFormFields()),
   });
 
   const onSubmit: SubmitHandler<RegisterFormFields> = async (values) => {
-    const res = await register(values);
-
-    if (res.error) {
-      toast.error("Failed to register", {
-        description: res.error,
-      });
-      return;
-    }
-
-    toast.success("User register successfully");
+    register.mutate(values);
   };
 
   return (
@@ -51,7 +54,13 @@ export default function PageRegister() {
           control={form.control}
         />
 
-        <Button type="submit">Register</Button>
+        <Button
+          type="submit"
+          isLoading={register.isPending}
+          disabled={register.isPending}
+        >
+          Register
+        </Button>
       </Form>
     </>
   );

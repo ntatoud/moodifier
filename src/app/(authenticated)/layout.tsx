@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { logout } from "@/features/auth/logout/actions";
+import Header from "@/features/layout/Header";
 import MobileNav from "@/features/layout/MobileNav";
 import SideNav from "@/features/layout/SideNav";
 import { validateRequest } from "@/server/auth/lucia";
@@ -23,11 +22,7 @@ export default async function AuthenticatedLayout({
 
       <MobileNav />
       <main className="my-4 flex flex-1 flex-col items-center justify-center">
-        <header>
-          <form action={logout}>
-            <Button type="submit">Log out</Button>
-          </form>
-        </header>
+        <Header />
         {children}
       </main>
     </div>
