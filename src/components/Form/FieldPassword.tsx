@@ -1,13 +1,13 @@
 import { Button } from "../ui/button";
-import { Input, InputProps } from "../ui/input";
-import { FieldCommonProps, useFormFieldContext } from "./FormField";
+import { Input, type InputProps } from "../ui/input";
+import { type FieldCommonProps, useFormFieldContext } from "./FormField";
 import { FormFieldError } from "./FormField/FormFieldError";
 import { FormFieldHelper } from "./FormField/FormFieldHelper";
 import { FormFieldItem } from "./FormField/FormFieldItem";
 import { FormFieldLabel } from "./FormField/FormFieldLabel";
 import { Eye, EyeOff } from "lucide-react";
-import { ReactNode, useState } from "react";
-import { Controller, FieldPath, FieldValues } from "react-hook-form";
+import { type ReactNode, useState } from "react";
+import { Controller, type FieldPath, type FieldValues } from "react-hook-form";
 
 export type FieldPasswordProps<
   TFieldValues extends FieldValues = FieldValues,

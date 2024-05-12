@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import SideNav from "@/features/layout/SideNav";
 import MobileNav from "@/features/layout/MobileNav";
 import type { Metadata } from "next";
+import { Toaster } from "@/components/ui/sonner";
 
 const headingFont = Poppins({
   subsets: ["latin"],
@@ -50,6 +51,7 @@ export default function RootLayout({
               {children}
             </main>
           </div>
+          <Toaster position="top-right" richColors />
         </TRPCReactProvider>
       </body>
     </html>
