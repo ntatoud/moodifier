@@ -1,7 +1,5 @@
 import withPWAInit from "@ducanh2912/next-pwa";
 
-await import("./src/env.js");
-
 const withPWA = withPWAInit({
   dest: "public",
   cacheStartUrl: false,
