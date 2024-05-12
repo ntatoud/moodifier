@@ -25,12 +25,16 @@ export function SideNavItem({ name, href, Icon }: NavItem) {
 }
 
 export function MobileNavItem({ name, href, Icon }: NavItem) {
+  const pathname = usePathname();
+
   return (
     <Link
       href={href}
-      className="flex flex-col items-center text-muted-foreground"
+      className={cn("flex flex-col items-center text-muted-foreground", {
+        "text-primary": pathname === href,
+      })}
     >
-      <Icon className="mr-1 size-6" />
+      <Icon className={cn("mr-1 size-6", { "size-7": pathname === href })} />
       {name}
     </Link>
   );
