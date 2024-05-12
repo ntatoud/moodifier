@@ -6,6 +6,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/lib/utils";
 import SideNav from "@/features/layout/SideNav";
 import MobileNav from "@/features/layout/MobileNav";
+import type { Metadata } from "next";
 
 const headingFont = Poppins({
   subsets: ["latin"],
@@ -19,9 +20,10 @@ const defaultFont = Quicksand({
   weight: ["600"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Moodifier",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/logo-moodifier.png" }],
+  manifest: "/webmanifest.json",
 };
 
 export default function RootLayout({
