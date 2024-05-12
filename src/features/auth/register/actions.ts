@@ -1,4 +1,5 @@
 "use server";
+
 import { hash } from "bcrypt";
 import type { RegisterFormFields } from "./schemas";
 import { generateId } from "lucia";
@@ -6,6 +7,7 @@ import { db } from "@/server/db";
 import { users } from "@/server/db/schema";
 import { lucia } from "@/server/auth/lucia";
 import { cookies } from "next/headers";
+import { eq } from "drizzle-orm";
 
 export const register = async (values: RegisterFormFields) => {
   const hashedPassword = await hash(values.password, 12);
@@ -14,6 +16,15 @@ export const register = async (values: RegisterFormFields) => {
 
   console.log(values);
   try {
+    const existingUser = await db.query.users.findFirst({
+      where: (table) => eq(table.username, values.username),
+    });
+
+    if (existingUser) {
+      return {
+        error: "User already exists",
+      };
+    }
     const user = await db
       .insert(users)
       .values({

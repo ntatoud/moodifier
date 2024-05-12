@@ -4,8 +4,6 @@ import { Poppins, Quicksand } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/lib/utils";
-import SideNav from "@/features/layout/SideNav";
-import MobileNav from "@/features/layout/MobileNav";
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -43,14 +41,7 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-screen flex-col">
         <TRPCReactProvider>
-          <div className="mx-auto flex min-h-screen w-full max-w-screen-xl justify-center">
-            <SideNav />
-
-            <MobileNav />
-            <main className="my-4 flex flex-1 flex-col items-center justify-center">
-              {children}
-            </main>
-          </div>
+          {children}
           <Toaster position="top-right" richColors />
         </TRPCReactProvider>
       </body>
