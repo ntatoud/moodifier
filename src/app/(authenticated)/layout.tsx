@@ -1,4 +1,3 @@
-import Header from "@/features/layout/Header";
 import MobileNav from "@/features/layout/MobileNav";
 import SideNav from "@/features/layout/SideNav";
 import { validateRequest } from "@/server/auth/lucia";
@@ -22,7 +21,6 @@ export default async function AuthenticatedLayout({
 
       <MobileNav />
       <main className="my-4 flex flex-1 flex-col items-center justify-center">
-        <Header />
         {children}
       </main>
     </div>

@@ -18,7 +18,7 @@ export function SideNavItem({ name, href, Icon }: NavItem) {
         },
       )}
     >
-      <Icon className="mr-1 size-6 border-r-2 " />
+      <Icon className="mr-1 size-6" />
       {name}
     </Link>
   );
