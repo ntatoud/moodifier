@@ -1,67 +1,20 @@
-"use client";
-import {
-  zRegisterFormFields,
-  type RegisterFormFields,
-} from "@/features/auth/register/schemas";
-import { type SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/Form";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { api } from "@/trpc/react";
+import { RegisterForm } from "@/features/auth/register/RegisterForm";
+import Link from "next/link";
 
 export default function PageRegister() {
-  const router = useRouter();
-  const register = api.auth.register.useMutation({
-    onSuccess: () => {
-      router.refresh();
-      toast.success("Account created successfully");
-    },
-    onError: () => {
-      toast.error("Failed to create account");
-    },
-  });
-
-  const form = useForm<RegisterFormFields>({
-    values: { username: "", password: "", passwordConfirm: "" },
-    resolver: zodResolver(zRegisterFormFields()),
-  });
-
-  const onSubmit: SubmitHandler<RegisterFormFields> = async (values) => {
-    register.mutate(values);
-  };
-
+  console.log("test");
   return (
     <>
-      <Form {...form} onSubmit={onSubmit}>
-        <FormField
-          name="username"
-          type="text"
-          label="Username"
-          control={form.control}
-        />
-        <FormField
-          name="password"
-          type="password"
-          label="Password"
-          control={form.control}
-        />
-        <FormField
-          name="passwordConfirm"
-          type="password"
-          label="Confirm Password"
-          control={form.control}
-        />
-
-        <Button
-          type="submit"
-          isLoading={register.isPending}
-          disabled={register.isPending}
-        >
-          Register
-        </Button>
-      </Form>
+      <h1 className="font-heading text-3xl leading-loose tracking-tight">
+        Create an account
+      </h1>
+      <span className="inline text-muted-foreground">
+        Already have an account?{" "}
+        <Link href="/login" className="text-primary underline">
+          Connect
+        </Link>
+      </span>
+      <RegisterForm />
     </>
   );
 }

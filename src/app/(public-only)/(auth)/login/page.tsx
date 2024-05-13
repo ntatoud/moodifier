@@ -1,60 +1,19 @@
-"use client";
-import {
-  zLoginFormFields,
-  type LoginFormFields,
-} from "@/features/auth/login/schemas";
-import { type SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/Form";
-import { toast } from "sonner";
-import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
+import { LoginForm } from "@/features/auth/login/LoginForm";
+import Link from "next/link";
 
-export default function PageRegister() {
-  const router = useRouter();
-  const login = api.auth.login.useMutation({
-    onSuccess: () => {
-      router.refresh();
-      toast.success("Logged in successfully");
-    },
-    onError: () => {
-      toast.error("Failed to log in the user");
-    },
-  });
-  const form = useForm<LoginFormFields>({
-    values: { username: "", password: "" },
-    resolver: zodResolver(zLoginFormFields()),
-  });
-
-  const onSubmit: SubmitHandler<LoginFormFields> = async (values) => {
-    login.mutate(values);
-  };
-
+export default function PageLogin() {
   return (
     <>
-      <Form {...form} onSubmit={onSubmit}>
-        <FormField
-          name="username"
-          type="text"
-          label="Username"
-          control={form.control}
-        />
-        <FormField
-          name="password"
-          type="password"
-          label="Password"
-          control={form.control}
-        />
-
-        <Button
-          type="submit"
-          isLoading={login.isPending}
-          disabled={login.isPending}
-        >
-          Connect
-        </Button>
-      </Form>
+      <h1 className="font-heading text-3xl leading-loose tracking-tight">
+        Log in to your account
+      </h1>
+      <span className="inline text-muted-foreground">
+        First time here?{" "}
+        <Link href="/register" className="text-primary underline">
+          Register
+        </Link>
+      </span>
+      <LoginForm />
     </>
   );
 }

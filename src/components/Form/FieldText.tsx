@@ -38,6 +38,7 @@ export const FieldText = <
             autoFocus={props.autoFocus}
             disabled={props.isDisabled}
             className={inputClassName}
+            required={props.optionalityHint === "required"}
             {...field}
           />
           {!!props.helper && <FormFieldHelper>{props.helper}</FormFieldHelper>}

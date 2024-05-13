@@ -50,7 +50,9 @@ export const FormFieldItem = forwardRef<HTMLDivElement, FormFieldItemProps>(
           isDisabled={fieldContext.isDisabled}
           {...props}
         >
-          <div className={cn("flex flex-col", className)}>{props.children}</div>
+          <div className={cn("flex flex-col gap-1", className)}>
+            {props.children}
+          </div>
         </FormControl>
       </FormFieldItemContext.Provider>
     );
