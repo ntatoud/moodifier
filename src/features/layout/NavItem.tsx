@@ -11,7 +11,7 @@ export function SideNavItem({ name, href, Icon }: NavItem) {
     <Link
       href={href}
       className={cn(
-        "inline-flex w-full items-center rounded-md px-3 py-2 hover:bg-gray-200",
+        "inline-flex w-full items-center rounded-md px-3 py-2 hover:bg-gray-200 dark:hover:bg-gray-800",
         {
           "border-r-4 border-primary/50 bg-gray-200 font-bold text-primary dark:bg-gray-800":
             pathname === href,

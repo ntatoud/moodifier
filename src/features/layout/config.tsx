@@ -12,6 +12,6 @@ export const NavItems = [
     href: "/settings",
     Icon: Settings,
   },
-] as const;
+];
 
 export type NavItem = (typeof NavItems)[number];

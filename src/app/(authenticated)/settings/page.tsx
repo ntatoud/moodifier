@@ -27,7 +27,7 @@ export default function PageSettings() {
       <Button
         onClick={() => logout.mutate()}
         variant="outline"
-        className="text-destructive"
+        className="text-destructive dark:text-red-500"
         isLoading={logout.isPending}
         disabled={logout.isPending}
       >

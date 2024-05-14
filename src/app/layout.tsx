@@ -32,7 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(headingFont.variable, defaultFont.variable)}>
+    <html
+      lang="en"
+      className={cn(headingFont.variable, defaultFont.variable)}
+      suppressHydrationWarning
+    >
       <head>
         <meta charSet="utf-8" />
         <meta
