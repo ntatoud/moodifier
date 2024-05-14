@@ -1,5 +1,6 @@
 "use client";
 
+import { ColorModeToggle } from "@/components/ColorModeToggle";
 import { Button } from "@/components/ui/button";
 import { api } from "@/trpc/react";
 import { LogOut } from "lucide-react";
@@ -32,6 +33,7 @@ export default function PageSettings() {
       >
         Log Out
         <LogOut className="ml-1 size-4" />
+        <ColorModeToggle />
       </Button>
     </>
   );

@@ -12,7 +12,8 @@ const getCalendarDayVariant = ({ colors }: UserTheme) => {
       variants: {
         variant: {
           outside: "cursor-not-allowed opacity-20",
-          empty: "bg-muted-foreground opacity-50",
+          empty: "",
+          future: "bg-muted-foreground opacity-50",
           ...colors.mood,
         },
       },
@@ -25,21 +26,16 @@ type CalendarDayProps = {
 } & VariantProps<ReturnType<typeof getCalendarDayVariant>>;
 export const CalendarDay = ({ date, variant }: CalendarDayProps) => {
   const calendarDayVariants = getCalendarDayVariant(userTheme);
+  const variantClassName = calendarDayVariants({ variant });
 
   if (variant === "outside") {
-    return (
-      <div className={cn(calendarDayVariants({ variant }))}>
-        {format(date, "d")}
-      </div>
-    );
+    return <div className={cn(variantClassName)}>{format(date, "d")}</div>;
   }
 
   if (isAfter(date, new Date())) {
     return (
       <Tooltip title="This is in the future !" delay={0.2}>
-        <div className={cn(calendarDayVariants({ variant }))}>
-          {format(date, "d")}
-        </div>
+        <div className={cn(variantClassName)}>{format(date, "d")}</div>
       </Tooltip>
     );
   }
@@ -47,7 +43,7 @@ export const CalendarDay = ({ date, variant }: CalendarDayProps) => {
   return (
     <Link
       href={`/notes/${format(date, "yyyy-MM-dd")}`}
-      className={cn(calendarDayVariants({ variant }), {
+      className={cn(variantClassName, {
         "border-2 border-foreground": isToday(date),
       })}
     >

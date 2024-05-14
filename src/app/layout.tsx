@@ -6,6 +6,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const headingFont = Poppins({
   subsets: ["latin"],
@@ -41,8 +42,15 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-screen flex-col">
         <TRPCReactProvider>
-          {children}
-          <Toaster position="top-right" richColors />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster position="top-right" richColors />
+          </ThemeProvider>
         </TRPCReactProvider>
       </body>
     </html>

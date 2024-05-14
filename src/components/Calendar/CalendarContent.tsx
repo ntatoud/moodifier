@@ -4,6 +4,7 @@ import {
   endOfMonth,
   format,
   getDay,
+  isAfter,
   startOfMonth,
   subDays,
 } from "date-fns";
@@ -34,7 +35,11 @@ export const CalendarContent = () => {
         <CalendarDay
           key={day.toString()}
           date={day}
-          variant={data[format(day, "yyyy-MM-dd")]?.mood ?? "empty"}
+          variant={
+            isAfter(day, new Date())
+              ? "future"
+              : data[format(day, "yyyy-MM-dd")]?.mood ?? "empty"
+          }
         />
       ))}
       {Array.from({
