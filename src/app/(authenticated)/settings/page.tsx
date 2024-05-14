@@ -33,8 +33,8 @@ export default function PageSettings() {
       >
         Log Out
         <LogOut className="ml-1 size-4" />
-        <ColorModeToggle />
       </Button>
+      <ColorModeToggle />
     </>
   );
 }
