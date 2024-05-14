@@ -1,20 +1,35 @@
 import { z } from "zod";
 
-export const FEEDBACK_LABELS = [
-  "Bug",
-  "Improvement",
-  "Feature Request",
-  "General Feedback",
-  "Other",
+export const FEEDBACK_TYPES = [
+  {
+    label: "Bug",
+    value: "bug",
+  },
+  {
+    label: "Improvement",
+    value: "improvement",
+  },
+  {
+    label: "Feature ",
+    value: "feature",
+  },
+  {
+    label: "Other",
+    value: "other",
+  },
 ] as const;
 
-export const zFeedbackLabel = z.enum(FEEDBACK_LABELS);
+export const zFeedbackType = () =>
+  z.object({
+    label: z.string(),
+    value: z.string(),
+  });
 
 export type FeedbackFormFields = z.infer<
   ReturnType<typeof zFeedbackFormFields>
 >;
 export const zFeedbackFormFields = () =>
   z.object({
-    label: zFeedbackLabel,
+    type: z.string(),
     description: z.string(),
   });

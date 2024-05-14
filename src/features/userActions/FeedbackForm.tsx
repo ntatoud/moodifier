@@ -1,57 +1,55 @@
-import { Form } from "@/components/Form";
+import { Form, FormField } from "@/components/Form";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import {
-  FEEDBACK_LABELS,
+  FEEDBACK_TYPES,
   zFeedbackFormFields,
   type FeedbackFormFields,
 } from "./schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useIssueCreate } from "./service";
 
 export const FeedbackForm = () => {
+  const createIssue = useIssueCreate();
   const form = useForm<FeedbackFormFields>({
+    mode: "onBlur",
     defaultValues: {
-      label: "Bug",
+      type: FEEDBACK_TYPES[0].value,
       description: "",
     },
     resolver: zodResolver(zFeedbackFormFields()),
   });
 
-  const onSubmit = (data: FeedbackFormFields) => {
-    console.log(data);
+  const onSubmit = async (data: FeedbackFormFields) => {
+    await createIssue.mutateAsync(data);
   };
+
   return (
     <Form {...form} onSubmit={onSubmit}>
       <div className="flex flex-col items-start gap-4">
-        <Select defaultValue={FEEDBACK_LABELS[0].toLowerCase()}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {FEEDBACK_LABELS.map((label) => (
-                <SelectItem
-                  key={`feedback-select-${label}`}
-                  value={label.toLowerCase()}
-                >
-                  {label}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <FormField
+          type="select"
+          options={FEEDBACK_TYPES}
+          label="What kind of feedback ?"
+          name="type"
+          control={form.control}
+        />
 
-        <Textarea rows={8} />
-        <Button type="submit" className="place-self-end">
+        <FormField
+          type="textarea"
+          label="Describe your idea"
+          name="description"
+          control={form.control}
+          placeholder="Please describe your idea in detail"
+          className="w-full"
+          rows={8}
+        />
+        <Button
+          type="submit"
+          className="place-self-end"
+          isLoading={createIssue.isPending}
+          disabled={createIssue.isPending}
+        >
           Send
         </Button>
       </div>

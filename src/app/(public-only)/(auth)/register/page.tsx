@@ -2,7 +2,6 @@ import { RegisterForm } from "@/features/auth/register/RegisterForm";
 import Link from "next/link";
 
 export default function PageRegister() {
-  console.log("test");
   return (
     <>
       <h1 className="font-heading text-3xl leading-loose tracking-tight">

@@ -1,5 +1,7 @@
 import { FieldPassword, type FieldPasswordProps } from "../FieldPassword";
+import { FieldSelect, type FieldSelectProps } from "../FieldSelect";
 import { FieldText, type FieldTextProps } from "../FieldText";
+import { FieldTextarea, type FieldTextareaProps } from "../FieldTextarea";
 import { useFormFieldItemContext } from "./FormFieldItem";
 import { createContext, useContext, useMemo } from "react";
 import {
@@ -32,7 +34,9 @@ export const FormField = <
   props:
     | FieldCustomProps<TFieldValues, TName>
     | FieldTextProps<TFieldValues, TName>
-    | FieldPasswordProps<TFieldValues, TName>,
+    | FieldPasswordProps<TFieldValues, TName>
+    | FieldTextareaProps<TFieldValues, TName>
+    | FieldSelectProps<TFieldValues, TName>,
 ) => {
   const getField = () => {
     switch (props.type) {
@@ -45,6 +49,12 @@ export const FormField = <
 
       case "password":
         return <FieldPassword {...props} />;
+
+      case "textarea":
+        return <FieldTextarea {...props} />;
+
+      case "select":
+        return <FieldSelect {...props} />;
     }
   };
 

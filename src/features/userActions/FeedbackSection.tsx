@@ -6,14 +6,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function FeedbackSection() {
   return (
     <Popover>
       <PopoverContent align="center" side="top" asChild className="w-96 p-0">
         <Card>
-          <CardHeader>Leave a feedback!</CardHeader>
+          <CardHeader>
+            <CardTitle className="text-xl">Leave a feedback!</CardTitle>
+          </CardHeader>
           <CardContent>
             <FeedbackForm />
           </CardContent>
