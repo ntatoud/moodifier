@@ -54,19 +54,21 @@ export const FieldSelect = <
         const { value, onChange, ref, ...fieldProps } = field;
         const selectValue =
           props.options?.find((option) => option.value === value) ?? undefined;
+        console.log(selectValue);
+        console.log(value);
         return (
           <FormFieldItem>
             {!!props.label && <FormFieldLabel>{props.label}</FormFieldLabel>}
             <Select
-              defaultValue={selectValue?.value}
+              value={selectValue?.value}
               onValueChange={(value: string) => onChange(value)}
-              {...fieldProps}
             >
               <SelectTrigger
                 className="w-[180px]"
                 autoFocus={props.autoFocus}
                 ref={ref}
                 disabled={props.isDisabled}
+                {...fieldProps}
               >
                 <SelectValue placeholder={props.placeholder} />
               </SelectTrigger>

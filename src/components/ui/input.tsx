@@ -28,7 +28,7 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cn(
-          "group flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 aria-disabled:cursor-not-allowed aria-disabled:bg-gray-200 aria-disabled:opacity-50",
+          "group flex h-10 w-full rounded-md border border-input  px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 aria-disabled:cursor-not-allowed aria-disabled:bg-gray-200 aria-disabled:opacity-50",
           className,
         )}
         aria-disabled={props.disabled}
@@ -37,7 +37,7 @@ const InputPassword = React.forwardRef<HTMLInputElement, InputProps>(
           type={showPassword ? "text" : "password"}
           placeholder={props.placeholder}
           autoFocus={props.autoFocus}
-          className="h-full w-full outline-none disabled:cursor-not-allowed"
+          className="h-full w-full bg-transparent outline-none disabled:cursor-not-allowed"
           ref={ref}
           {...props}
         />

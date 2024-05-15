@@ -39,6 +39,7 @@ export const NoteForm = () => {
     });
   };
 
+  console.log(note?.mood);
   if (noteIsPending) {
     return <FullLoader />;
   }
