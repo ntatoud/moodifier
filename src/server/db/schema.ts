@@ -19,3 +19,10 @@ export const sessions = createTable("session", {
     mode: "date",
   }).notNull(),
 });
+
+export const notes = createTable("note", {
+  id: text("id").primaryKey(),
+  title: varchar("title", { length: 256 }).notNull(),
+  body: text("body").notNull(),
+  date: text("date").notNull().unique(),
+});
