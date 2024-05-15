@@ -5,11 +5,12 @@ import { toast } from "sonner";
 // This hook is too avoid polluting the component with the logic of fetching and updating notes
 export const useNoteCRUD = (date: string) => {
   const { data, isPending } = api.notes.getByDate.useQuery({ date });
-
+  const trpcUtils = api.useUtils();
   const router = useRouter();
   const createNote = api.notes.create.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success("Your note was created successfully");
+      await trpcUtils.notes.getAll.reset();
       router.push("/");
     },
     onError: () => {

@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export type MonthlyData = Record<string, { mood: Mood }>;
+
 export const MOOD_VALUES = ["happy", "sad", "angry", "tired"] as const;
 export const MOOD_OPTIONS = MOOD_VALUES.map((value) => ({
   label: value[0]?.toUpperCase() + value.slice(1),

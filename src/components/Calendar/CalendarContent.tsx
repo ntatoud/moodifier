@@ -1,3 +1,5 @@
+// @typescript-eslint/no-unsafe-assignment
+
 import {
   addDays,
   eachDayOfInterval,
@@ -10,7 +12,6 @@ import {
 } from "date-fns";
 import { useCurrentDate, useMonthlyData } from "./store";
 import { CalendarDay } from "./CalendarDay";
-
 export const CalendarContent = () => {
   const currentDate = useCurrentDate();
   const daysInMonth = eachDayOfInterval({

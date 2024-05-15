@@ -1,11 +1,25 @@
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { zMood, zNote } from "@/features/notes/schemas";
 import { notes } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 
 export const notesRouter = createTRPCRouter({
+  getAll: protectedProcedure()
+    .output(
+      z.object({
+        notes: z.array(zNote()),
+      }),
+    )
+    .query(async ({ ctx }) => {
+      const { db } = ctx;
+      const notes = await db.query.notes.findMany({
+        where: (table) => eq(table.userId, ctx.user.id),
+      });
+
+      return { notes: z.array(zNote()).parse(notes) };
+    }),
   getByDate: protectedProcedure()
     .input(
       z.object({
@@ -20,7 +34,8 @@ export const notesRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const { db } = ctx;
       const note = await db.query.notes.findFirst({
-        where: (table) => eq(table.date, input.date),
+        where: (table) =>
+          and(eq(table.date, input.date), eq(table.userId, ctx.user.id)),
       });
 
       return { noteData: zNote().optional().parse(note) };
@@ -39,6 +54,7 @@ export const notesRouter = createTRPCRouter({
         await db
           .insert(notes)
           .values({
+            userId: ctx.user.id,
             ...input,
           })
           .returning({
@@ -73,7 +89,7 @@ export const notesRouter = createTRPCRouter({
           .set({
             ...input,
           })
-          .where(eq(notes.date, input.date))
+          .where(and(eq(notes.date, input.date), eq(notes.userId, ctx.user.id)))
           .returning({
             mood: notes.mood,
           })

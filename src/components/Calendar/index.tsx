@@ -3,7 +3,7 @@
 import { CalendarStoreProvider } from "./store";
 import { CalendarHeader } from "./CalendarHeader";
 import { CalendarContent } from "./CalendarContent";
-import type { MonthlyData } from "@/server/mocks/monthlyData";
+import type { MonthlyData } from "@/features/notes/schemas";
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 

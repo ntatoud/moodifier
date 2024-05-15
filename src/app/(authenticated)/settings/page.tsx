@@ -9,9 +9,11 @@ import { toast } from "sonner";
 
 export default function PageSettings() {
   const router = useRouter();
+  const trpcUtils = api.useUtils();
   const logout = api.auth.logout.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success("Logged out successfully");
+      await trpcUtils.notes.getAll.reset();
       router.refresh();
     },
     onError: () => {
