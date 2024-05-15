@@ -66,6 +66,7 @@ export const FieldSelect = <
                 className="w-[180px]"
                 autoFocus={props.autoFocus}
                 ref={ref}
+                disabled={props.isDisabled}
               >
                 <SelectValue placeholder={props.placeholder} />
               </SelectTrigger>

@@ -27,13 +27,14 @@ export const FeedbackForm = () => {
 
   return (
     <Form {...form} onSubmit={onSubmit}>
-      <div className="flex flex-col items-start gap-4">
+      <div className="flex w-full flex-col items-start gap-4">
         <FormField
           type="select"
           options={FEEDBACK_TYPES}
           label="What kind of feedback ?"
           name="type"
           control={form.control}
+          optionalityHint="required"
         />
         <FormField
           type="text"
@@ -41,7 +42,6 @@ export const FeedbackForm = () => {
           name="title"
           control={form.control}
           optionalityHint="required"
-          className="w-full"
         />
         <FormField
           type="textarea"
@@ -49,7 +49,6 @@ export const FeedbackForm = () => {
           name="description"
           control={form.control}
           placeholder="Please describe your idea in detail"
-          className="w-full"
           rows={8}
         />
         <Button

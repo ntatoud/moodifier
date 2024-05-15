@@ -1,6 +1,13 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
-import { pgTableCreator, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { MOOD_VALUES } from "@/features/notes/schemas";
+import {
+  pgEnum,
+  pgTableCreator,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 export const createTable = pgTableCreator((name) => `moodifier_${name}`);
 
 export const users = createTable("user", {
@@ -20,9 +27,9 @@ export const sessions = createTable("session", {
   }).notNull(),
 });
 
+export const moodEnum = pgEnum("mood", MOOD_VALUES);
 export const notes = createTable("note", {
-  id: text("id").primaryKey(),
-  title: varchar("title", { length: 256 }).notNull(),
+  mood: moodEnum("mood").notNull().default("happy"),
   body: text("body").notNull(),
   date: text("date").notNull().unique(),
 });

@@ -36,6 +36,7 @@ export const FieldTextarea = <
             placeholder={props.placeholder}
             autoFocus={props.autoFocus}
             rows={props.rows}
+            disabled={props.isDisabled}
             {...field}
           />
           {!!props.helper && <FormFieldHelper>{props.helper}</FormFieldHelper>}
