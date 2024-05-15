@@ -2,7 +2,7 @@ import { createStore, type StoreApi, useStore } from "zustand";
 
 import { createContext, type ReactNode, useContext, useState } from "react";
 import { addMonths, subMonths } from "date-fns";
-import type { MonthlyData } from "@/server/mocks/monthlyData";
+import type { MonthlyData } from "@/features/notes/schemas";
 
 const CalendarStoreContext = createContext<StoreApi<CalendarStore> | null>(
   null,
