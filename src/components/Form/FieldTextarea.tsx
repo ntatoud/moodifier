@@ -8,6 +8,7 @@ import { FormFieldHelper } from "@/components/Form/FormField/FormFieldHelper";
 import { FormFieldItem } from "@/components/Form/FormField/FormFieldItem";
 import { FormFieldLabel } from "@/components/Form/FormField/FormFieldLabel";
 import { Textarea, type TextareaProps } from "../ui/textarea";
+import { cn } from "@/lib/utils";
 
 export type FieldTextareaProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -29,7 +30,7 @@ export const FieldTextarea = <
     <Controller
       {...props}
       render={({ field }) => (
-        <FormFieldItem className={props.className}>
+        <FormFieldItem className={cn("w-full", props.className)}>
           {!!props.label && <FormFieldLabel>{props.label}</FormFieldLabel>}
           <Textarea
             placeholder={props.placeholder}

@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { InputPassword, type InputProps } from "../ui/input";
 import { type FieldCommonProps } from "./FormField";
 import { FormFieldError } from "./FormField/FormFieldError";
@@ -30,7 +31,7 @@ export const FieldPassword = <
     <Controller
       {...props}
       render={({ field }) => (
-        <FormFieldItem className={className}>
+        <FormFieldItem className={cn("w-full", className)}>
           {!!props.label && <FormFieldLabel>{props.label}</FormFieldLabel>}
           <InputPassword
             placeholder={props.placeholder}
