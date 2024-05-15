@@ -15,6 +15,7 @@ export const FeedbackForm = () => {
     mode: "onBlur",
     defaultValues: {
       type: FEEDBACK_TYPES[0].value,
+      title: "",
       description: "",
     },
     resolver: zodResolver(zFeedbackFormFields()),
@@ -34,7 +35,14 @@ export const FeedbackForm = () => {
           name="type"
           control={form.control}
         />
-
+        <FormField
+          type="text"
+          label="Title"
+          name="title"
+          control={form.control}
+          optionalityHint="required"
+          className="w-full"
+        />
         <FormField
           type="textarea"
           label="Describe your idea"

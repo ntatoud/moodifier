@@ -31,5 +31,6 @@ export type FeedbackFormFields = z.infer<
 export const zFeedbackFormFields = () =>
   z.object({
     type: z.string(),
-    description: z.string(),
+    title: z.string(),
+    description: z.string().optional(),
   });
