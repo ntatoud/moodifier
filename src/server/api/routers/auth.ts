@@ -7,7 +7,7 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { zRegisterFormFields } from "@/features/auth/register/schemas";
 import { generateId } from "lucia";
-import { users } from "@/server/db/schema";
+import { sessions, users } from "@/server/db/schema";
 
 export const authRouter = createTRPCRouter({
   register: publicProcedure()
@@ -117,12 +117,21 @@ export const authRouter = createTRPCRouter({
     .input(z.void())
     .output(z.void())
     .mutation(async ({ ctx }) => {
-      const { lucia, session } = ctx;
+      const { lucia, session, db } = ctx;
 
       if (!session) {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Not logged in",
+        });
+      }
+
+      try {
+        await db.delete(sessions).where(eq(sessions.id, session.id));
+      } catch {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to close the session",
         });
       }
 
